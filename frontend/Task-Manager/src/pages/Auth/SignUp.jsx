@@ -23,6 +23,8 @@ const SignUp = () => {
     //handle signup form submit
         const handleSignUp = async (e) => {
             e.preventDefault();
+
+            let profileImageUrl = ''
     
             if(!fullName) {
             setError("Please enter full name.");
@@ -43,6 +45,8 @@ const SignUp = () => {
     
              //signup api call
              try {
+
+                // 
                 const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
                     name: fullName,
                     email,
