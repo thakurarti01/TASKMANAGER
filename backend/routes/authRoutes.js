@@ -8,7 +8,7 @@ const router = express.Router();
 //Auth Routes
 router.post("/register", registerUser); //register user
 router.post("/login", loginUser); //login user
-router.post("/profile",protect, getUserProfile); //get user profile
+router.get("/profile",protect, getUserProfile); //get user profile
 router.post("/profile", protect, updateUserProfile); //update profile
 
 router.post("/upload-image", upload.single("image"), (req, res) =>{

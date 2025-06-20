@@ -36,7 +36,9 @@ const Dashboard = () => {
         return () => {};
     }, []);
  
-    return <DashboardLayout activeMenu="Dashboard">Dashboard</DashboardLayout>;
+    return <DashboardLayout activeMenu="Dashboard">
+        {JSON.stringify(dashboardData)}
+    </DashboardLayout>;
     
 };
 export default Dashboard;
