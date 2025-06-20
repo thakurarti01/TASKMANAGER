@@ -19,6 +19,7 @@ const Login = () => {
     //handle login form submit
     const handleLogin = async (e) => {
         e.preventDefault();
+        console.log("✅ Login handler is running");//change 1
 
         if(!validateEmail(email)) {
         setError("Please enter a valid email address.");
@@ -38,7 +39,6 @@ const Login = () => {
                 email,
                 password,
             });
-
             const {token, role} = response.data;
 
             if(token) {
@@ -53,6 +53,7 @@ const Login = () => {
                 }
             }
          } catch (error){
+            console.error("🔥 LOGIN ERROR:", error);//change 2
             if (error.response && error.response.data.message){
                 setError(error.response.data.message);
             } else {

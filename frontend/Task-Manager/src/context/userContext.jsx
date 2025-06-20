@@ -19,7 +19,9 @@ const UserProvider = ({children}) => {
 
         const fetchUser = async () => {
             try{
+                console.log("📡 Fetching user with token:", accessToken); // ADD THIS
                 const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);
+                console.log("✅ User fetched:", response.data); // ADD THIS
                 setUser(response.data);
             } catch (error) {
                 console.error("User not authenticated", error);
