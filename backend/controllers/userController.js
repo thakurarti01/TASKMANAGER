@@ -33,6 +33,8 @@ const getUsers = async (req, res) =>{
                 };
             })
         );
+        // ✅ This is the missing line
+        res.json(usersWithTaskCounts);
     } catch (error){
         res.status(500).json({message: "Server error", error: error.message});
     }
