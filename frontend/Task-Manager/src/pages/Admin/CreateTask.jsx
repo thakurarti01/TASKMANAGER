@@ -9,7 +9,8 @@ import moment from "moment";
 import { LuTrash2 } from "react-icons/lu";
 import SelectDropdown from "../../components/inputs/SelectDropdown";
 import SelectUsers from "../../components/inputs/SelectUsers";
-
+import TodoListInput from "../../components/inputs/TodoListInput";
+import AddAttachmentsInput from "../../components/inputs/AddAttachmentsInput";
 const CreateTask = () => {
 
     const location = useLocation();
@@ -56,7 +57,40 @@ const CreateTask = () => {
     //update task
     const updateTask = async () => {};
 
-    const handleSubmit = async () => {};
+    const handleSubmit = async () => {
+        setError(null);
+
+        //input validation
+        if(!taskData.title.trim()){
+            setError("Title is required.");
+            return;
+        }
+        if(!taskData.description.trim()){
+            setError("Description is required.");
+            return;
+        }
+        if(!taskData.dueDate){
+            setError("Due date is required.");
+            return;
+        }
+
+        if(taskData.assignedTo?.length === 0) {
+            setError("Task not assigned to any member");
+            return;
+        }
+
+        if(taskData.todoChecklist?.length === 0) {
+            setError("Add atleast one todo task");
+            return;
+        }
+
+        if(taskId){
+            updateTask();
+            return;
+        }
+
+        createTask();
+    };
 
     //get task info by id
     const getTaskDetailsByID = async () => {};
@@ -157,6 +191,46 @@ const CreateTask = () => {
                                 }}
                                 />
                             </div>
+                        </div>
+
+                        <div className="mt-3">
+                            <label className="text-xs font-medium text-slate-600">
+                                TODO Checklist
+                            </label>
+
+                            <TodoListInput
+                            todoList={taskData?.todoChecklist}
+                            setTodoList={(value) => 
+                                handleValueChange("todoChecklist", value)
+                            }
+                            />
+                        </div>
+
+                        <div className="mt-3">
+                            <label className="text-xs font-medium text-slate-600">
+                                Add Attachments
+                            </label>
+
+                            <AddAttachmentsInput
+                            attachments={taskData?.attachments}
+                            setAttachments={(value) => 
+                                handleValueChange("attachments", value)
+                            }
+                            />
+                        </div>
+
+                        {error && (
+                            <p className="text-xs font-medium text-red-500 mt-5">{error}</p>
+                        )}
+
+                        <div className="flex justify-end mt-7">
+                            <button
+                            className="add-btn"
+                            onClick={handleSubmit}
+                            disabled={loading}
+                            >
+                                {taskId ? "UPDATE TASK" : "CREATE TASK"}
+                            </button>
                         </div>
                     </div>
                 </div>
