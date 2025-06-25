@@ -12,6 +12,7 @@ import SelectUsers from "../../components/inputs/SelectUsers";
 import TodoListInput from "../../components/inputs/TodoListInput";
 import AddAttachmentsInput from "../../components/inputs/AddAttachmentsInput";
 import Modal from "../../components/Modal";
+import DeleteAlert from "../../components/DeleteAlert";
 
 const CreateTask = () => {
 
@@ -183,11 +184,11 @@ const CreateTask = () => {
             await axiosInstance.delete(API_PATHS.TASKS.DELETE_TASK(taskId));
 
             setOpenDeleteAlert(false);
-            toast.success("Expense details deleted successfully");
+            toast.success("Task details deleted successfully");
             navigate('/admin/tasks')
         } catch (error) {
             console.error(
-                "Error deleting expense:",
+                "Error deleting Task:",
                 error.response?.data?.message || error.message
             );
         }
@@ -346,7 +347,7 @@ const CreateTask = () => {
             >
                 <DeleteAlert
                 content="Are you sure you want to delete this task?"
-                onDelete={() => deleteTask}
+                onDelete={() => deleteTask()}
                 />
             </Modal>
 
