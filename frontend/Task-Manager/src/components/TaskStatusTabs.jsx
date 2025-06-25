@@ -26,7 +26,7 @@ const TaskStatusTabs = ({tabs, activeTab, setActiveTab}) => {
                         </span>
                     </div>
                     {activeTab === tab.label && (
-                        <div className=""></div>
+                        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></div>
                     )}
                 </button>
             ))}

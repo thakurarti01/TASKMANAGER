@@ -151,7 +151,7 @@ const updateTask = async(req, res) => {
                 .status(400)
                 .json({message: "assignedTo must be an array of user IDs"});
             }
-            tasl.assignedTo = req.body.assignedTo;
+            task.assignedTo = req.body.assignedTo;
         }
 
         const updatedTask = await task.save();
