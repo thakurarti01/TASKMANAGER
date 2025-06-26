@@ -57,41 +57,41 @@ const ViewTaskDetails = () => {
     return(
         <DashboardLayout activeMenu="My Tasks">
             {task && (
-            <div className="mt-5">
-                <div className="grid grid-cols-1 md:grid-cols-4 mt-4">
-                    <div className="form-card col-span-3">
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-sm md:text-xl font-medium">
-                                {task?.title}
-                            </h2>
+                <div className="mt-5">
+                    <div className="grid grid-cols-1 md:grid-cols-4 mt-4">
+                        <div className="form-card col-span-3">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-sm md:text-xl font-medium">
+                                    {task?.title}
+                                </h2>
 
-                            <div
-                            className={`text-[11px] md:text-[13px] font-medium ${getStatusTagColor(
-                                task?.status
-                            )} px-4 py-0.5 rounded`}
-                            >
-                                {task?.status}
-                            </div>
-                        </div>    
-                    </div>   
+                                <div
+                                className={`text-[11px] md:text-[13px] font-medium ${getStatusTagColor(
+                                    task?.status
+                                )} px-4 py-0.5 rounded`}
+                                >
+                                    {task?.status}
+                                </div>
+                            </div>    
+                        </div>   
 
-                    <div className="col-span-1 mt-4">
-                        <InfoBox label="Description" value={task?.description} />
-                    </div>
-
-                    <div className="grid grid-cols-12 gap-4 mt-4">
-                        <div className="col-span-6 md:col-span-4">
-                            <InfoBox label="Priority" value={task?.priority} />
+                        <div className="col-span-1 mt-4">
+                            <InfoBox label="Description" value={task?.description} />
                         </div>
-                        <div className="col-span-6 md:col-span-4">
-                            <InfoBox
-                            label="Due Date"
-                            value={
-                                task?.dueDate
-                                ? moment(task?.dueDate).format("Do MMM YYYY")
-                                : "N/A"
-                            }
-                            />
+
+                        <div className="grid grid-cols-12 gap-4 mt-4">
+                            <div className="col-span-6 md:col-span-4">
+                                <InfoBox label="Priority" value={task?.priority} />
+                            </div>
+                            <div className="col-span-6 md:col-span-4">
+                                <InfoBox
+                                label="Due Date"
+                                value={
+                                    task?.dueDate
+                                    ? moment(task?.dueDate).format("Do MMM YYYY")
+                                    : "N/A"
+                                }
+                                />
                             </div>
                             <div className="col-span-6 md:col-span-4">
                                 <label className="text-xs font-medium text-slate-500">
