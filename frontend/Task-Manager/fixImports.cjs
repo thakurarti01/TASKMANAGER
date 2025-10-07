@@ -9,7 +9,7 @@ function getAllFiles(dirPath, arrayOfFiles) {
     const fullPath = path.join(dirPath, file);
     if (fs.statSync(fullPath).isDirectory()) {
       arrayOfFiles = getAllFiles(fullPath, arrayOfFiles);
-    } else if (file.endsWith('.jsx') || file.endsWith('.js')) {
+    } else if (file.endsWith('.js') || file.endsWith('.jsx')) {
       arrayOfFiles.push(fullPath);
     }
   });
@@ -20,13 +20,23 @@ function getAllFiles(dirPath, arrayOfFiles) {
 // Get all JS/JSX files
 const files = getAllFiles(path.join(__dirname, 'src'));
 
-files.forEach(file => {
-  let content = fs.readFileSync(file, 'utf8');
+// Recursive function to fix imports for any folder inside src/components
+function fixImportsForFolder(folderPath) {
+  const components = fs.readdirSync(folderPath);
 
-  // Example: fix InfoCard imports
-  content = content.replace(/(['"])\.\.\/\.\.\/components\/cards\/Infocard(['"])/gi, '$1../../components/cards/InfoCard$2');
+  files.forEach(file => {
+    let content = fs.readFileSync(file, 'utf8');
 
-  fs.writeFileSync(file, content, 'utf8');
-});
+    components.forEach(component => {
+      const regex = new RegExp(`(['"].*\\/cards\\/)${component.toLowerCase()}(['"])`, 'gi');
+      content = content.replace(regex, `$1${component}$2`);
+    });
 
-console.log('Import paths fixed!');
+    fs.writeFileSync(file, content, 'utf8');
+  });
+}
+
+// Fix imports in cards folder
+fixImportsForFolder(path.join(__dirname, 'src/components/cards'));
+
+console.log('All import paths fixed!');
