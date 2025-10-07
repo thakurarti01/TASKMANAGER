@@ -24,7 +24,7 @@ files.forEach(file => {
   let content = fs.readFileSync(file, 'utf8');
 
   // Example: fix InfoCard imports
-  content = content.replace(/(['"])\.\.\/\.\.\/components\/cards\/infocard(['"])/gi, '$1../../components/cards/InfoCard$2');
+  content = content.replace(/(['"])\.\.\/\.\.\/components\/cards\/Infocard(['"])/gi, '$1../../components/cards/InfoCard$2');
 
   fs.writeFileSync(file, content, 'utf8');
 });
