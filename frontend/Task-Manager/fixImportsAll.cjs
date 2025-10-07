@@ -28,7 +28,7 @@ function fixImportsForFolder(folderPath) {
     let content = fs.readFileSync(file, 'utf8');
 
     components.forEach(component => {
-      const regex = new RegExp(`(['"].*\\/cards\\/)${component.toLowerCase()}(['"])`, 'gi');
+      const regex = new RegExp(`(['"].*\\/Cards\\/)${component.toLowerCase()}(['"])`, 'gi');
       content = content.replace(regex, `$1${component}$2`);
     });
 
@@ -37,6 +37,6 @@ function fixImportsForFolder(folderPath) {
 }
 
 // Fix imports in cards folder
-fixImportsForFolder(path.join(__dirname, 'src/components/cards'));
+fixImportsForFolder(path.join(__dirname, 'src/components/Cards'));
 
 console.log('All import paths fixed!');
